@@ -12,20 +12,30 @@ source:
     - src_dbinc_atomic.h.patch  # [osx]
 
 build:
-  number: 2000
-  skip: True  # [win]
+  number: 0
 
 requirements:
   build:
-    - make
+    - make                  # [unix]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
 
-test:
-  commands:
-    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
+outputs:
+  - name: libdb
+    test:
+      commands:
+        - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
+        - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
+  # metapackage for old anaconda name (only available on linux/mac)
+  - name: db
+    requirements:
+      build:
+        # compilers are to ensure that variants are captured
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+      run:
+        - {{ pin_subpackage('libdb', exact=True) }}
 
 about:
   home: http://www.oracle.com/technology/software/products/berkeley-db/index.html
@@ -37,3 +47,4 @@ extra:
   recipe-maintainers:
     - ocefpaf
     - scopatz
+    - msarahan
