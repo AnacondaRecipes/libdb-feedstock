@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Get an updated config.sub and config.guess
+cp -r ${BUILD_PREFIX}/share/libtool/build-aux/config.* ./dist
+
+
 cd build_unix
 ../dist/configure \
   --prefix=$PREFIX \
