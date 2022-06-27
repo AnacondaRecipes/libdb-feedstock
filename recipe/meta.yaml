@@ -10,7 +10,6 @@ source:
   patches:
     # fixes atomic issue on clang, see https://trac.macports.org/ticket/53577#no1
     - src_dbinc_atomic.h.patch  # [unix or win]
-    - windows_proj.patch        # [win]
 
 build:
   number: 1
