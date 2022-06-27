@@ -7,9 +7,9 @@ package:
 source:
   url: http://download.oracle.com/berkeley-db/db-{{ version }}.tar.gz
   sha256: a9c5e2b004a5777aa03510cfe5cd766a4a3b777713406b02809c17c8e0e7a8fb
-  patches:
+  patches:  # [unix]
     # fixes atomic issue on clang, see https://trac.macports.org/ticket/53577#no1
-    - src_dbinc_atomic.h.patch
+    - src_dbinc_atomic.h.patch  # [unix]
 
 build:
   number: 1
@@ -34,8 +34,7 @@ requirements:
     - libtool               # [unix]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - m2-patch  # [win]
-    - patch     # [not win]
+    - patch     # [unix]
   host:
 
 outputs:
