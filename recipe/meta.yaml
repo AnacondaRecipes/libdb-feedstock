@@ -32,10 +32,9 @@ requirements:
   build:
     - make                  # [unix]
     - libtool               # [unix]
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - patch     # [unix]
-    - m2-patch  # [win]
   host:
 
 outputs:
@@ -54,6 +53,7 @@ outputs:
     requirements:
       build:
         # compilers are to ensure that variants are captured
+        - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
       run:
